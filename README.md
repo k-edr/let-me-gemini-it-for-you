@@ -47,16 +47,6 @@ npx serve .
 | [ci.yml](.github/workflows/ci.yml) | push / PR to `main` | Syncs manifest, fails if `manifest.json` is stale, verifies locale files |
 | [deploy.yml](.github/workflows/deploy.yml) | push to `main` | Runs CI, deploys the repo root to **GitHub Pages** |
 
-### Enable GitHub Pages (one-time)
-
-1. Push this repo to GitHub
-2. **Settings → Pages → Build and deployment**
-3. Source: **GitHub Actions**
-4. After the first successful `Deploy to GitHub Pages` run, the site is live at  
-   `https://<user>.github.io/<repo>/`
-
-After each successful deploy, `deploy.yml` removes older `github-pages` deployments and keeps only the latest. Failed deploys do not trigger cleanup.
-
 ### Scripts
 
 ```bash
