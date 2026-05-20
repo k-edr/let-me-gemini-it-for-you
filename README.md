@@ -48,6 +48,8 @@ npx serve .
 4. After the first successful `Deploy to GitHub Pages` run, the site is live at  
    `https://<user>.github.io/<repo>/`
 
+After each successful deploy, `deploy.yml` removes older `github-pages` deployments and keeps only the latest. Failed deploys do not trigger cleanup.
+
 ### Scripts
 
 ```bash

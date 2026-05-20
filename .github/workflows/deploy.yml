@@ -9,6 +9,7 @@ permissions:
   contents: read
   pages: write
   id-token: write
+  deployments: write
 
 concurrency:
   group: pages-${{ github.ref }}
@@ -47,3 +48,64 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      # Runs only after a successful deploy: keep the newest deployment, drop the rest.
+      - name: Remove old Pages deployments
+        if: success()
+        uses: actions/github-script@v7
+        env:
+          PAGES_ENVIRONMENT: github-pages
+        with:
+          script: |
+            const environment = process.env.PAGES_ENVIRONMENT;
+            const { owner, repo } = context.repo;
+
+            const deployments = await github.paginate(
+              github.rest.repos.listDeployments,
+              { owner, repo, environment, per_page: 100 }
+            );
+
+            if (deployments.length <= 1) {
+              core.info('Only one deployment present — nothing to clean up.');
+              return;
+            }
+
+            deployments.sort(
+              (a, b) => new Date(b.created_at) - new Date(a.created_at)
+            );
+
+            const [latest, ...older] = deployments;
+            core.info(`Keeping deployment ${latest.id} (${latest.created_at}).`);
+
+            for (const deployment of older) {
+              try {
+                await github.rest.repos.createDeploymentStatus({
+                  owner,
+                  repo,
+                  deployment_id: deployment.id,
+                  state: 'inactive',
+                  environment,
+                  description: 'Superseded by a newer GitHub Pages deployment',
+                  auto_inactive: true,
+                });
+              } catch (error) {
+                core.warning(
+                  `Could not deactivate deployment ${deployment.id}: ${error.message}`
+                );
+              }
+
+              try {
+                await github.rest.repos.deleteDeployment({
+                  owner,
+                  repo,
+                  deployment_id: deployment.id,
+                });
+                core.info(`Deleted deployment ${deployment.id}`);
+              } catch (error) {
+                core.warning(
+                  `Could not delete deployment ${deployment.id}: ${error.message}`
+                );
+              }
+            }
+
+            core.info(`Cleanup done: removed ${older.length} older deployment(s).`);
