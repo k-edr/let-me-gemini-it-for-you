@@ -1,0 +1,39 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Verify static site & i18n
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Sync i18n manifest
+        run: npm run i18n:sync
+
+      - name: Check manifest is committed
+        run: git diff --exit-code translations/manifest.json
+
+      - name: Verify locale files
+        run: npm run i18n:verify
+
+      - name: Check required static files
+        run: |
+          test -f index.html
+          test -f translations/manifest.json
+          test -f .nojekyll

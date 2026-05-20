@@ -1,0 +1,35 @@
+// Copy to translations/{code}.js, then run: node scripts/sync-i18n-manifest.js
+window.LMGIFY_REGISTER_TRANSLATION('xx', {
+    label: 'Language Name',
+    flag: '🏳️',
+    strings: {
+        badgeTitle: "🤖 …",
+        heading: "<span class='heading-plain'>Let me </span><span class='gemini-text'>Gemini</span><span class='heading-plain'> it for you</span>",
+        subheading: "…",
+        inputPlaceholder: "…",
+        btnGetLink: "…",
+        btnTestSim: "…",
+        successMsg: "…",
+        copyBtn: "…",
+        copiedBtn: "…",
+        warnTitle: "…",
+        warnDesc1: "…",
+        warnDesc2: "…",
+        bottomDesc: "…",
+        simHeading: "<span class='heading-plain'>Let me </span><span class='gemini-text'>Gemini</span><span class='heading-plain'> it for you</span>",
+        simPlaceholder: "…",
+        simBtnSearch: "…",
+        simBtnEasy: "…",
+        step1Title: "…",
+        step1Desc: "…",
+        step2Title: "…",
+        step2Desc: "…",
+        step3Title: "…",
+        step3Desc: "…",
+        bannerDefault: "…",
+        redirectStatus: "…",
+        redirectManual: "…",
+        fallbackWarning: "…",
+        sarcasms: ["…", "…", "…", "…", "…", "…"]
+    }
+});

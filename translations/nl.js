@@ -1,0 +1,41 @@
+window.LMGIFY_REGISTER_TRANSLATION('nl', {
+    label: 'Nederlands',
+    flag: '🇳🇱',
+    strings: {
+        badgeTitle: "🤖 Laat mij het in Gemini voor je opzoeken",
+        heading: "<span class='heading-plain'>Let me </span><span class='gemini-text'>Gemini</span><span class='heading-plain'> it for you</span>",
+        subheading: "Je vriend is vergeten hoe je AI gebruikt en blijft domme vragen stellen? Maak een interactieve les voor ze!",
+        inputPlaceholder: "Welke domme vraag kreeg je?",
+        btnGetLink: "Link ophalen",
+        btnTestSim: "Simulatie testen",
+        successMsg: "Link succesvol aangemaakt!",
+        copyBtn: "Kopiëren",
+        copiedBtn: "Gekopieerd!",
+        warnTitle: "Opmerking van de ontwikkelaar:",
+        warnDesc1: 'Deze link is gemaakt in een <span class="text-amber-300 font-semibold">tijdelijke interactieve preview (sandbox)</span>. Hij werkt in dit tabblad (via „Simulatie testen“), maar je vrienden kunnen hem niet van buitenaf openen.',
+        warnDesc2: 'Om links voor iedereen te laten werken, host de hele projectmap (index.html + translations/) gratis op <a href="https://pages.github.com/" target="_blank" class="text-violet-400 hover:underline">GitHub Pages</a>, <a href="https://vercel.com" target="_blank" class="text-violet-400 hover:underline">Vercel</a> of <a href="https://www.netlify.com" target="_blank" class="text-violet-400 hover:underline">Netlify</a>!',
+        bottomDesc: "De URL laat je vriend een interactieve les zien en stuurt daarna door naar het antwoord met Gemini AI-overzicht (`udm=50`).",
+        simHeading: "<span class='heading-plain'>Laat mij in </span><span class='gemini-text'>Gemini</span><span class='heading-plain'> voor je zoeken</span>",
+        simPlaceholder: "Kijk goed...",
+        simBtnSearch: "Gemini-zoeken",
+        simBtnEasy: "Was dat moeilijk?",
+        step1Title: "Stap 1.",
+        step1Desc: "Open de invoerregel.",
+        step2Title: "Stap 2.",
+        step2Desc: "Typ je extreem complexe vraag...",
+        step3Title: "Stap 3.",
+        step3Desc: "Druk op de knop „Zoeken“.",
+        bannerDefault: "Instructies voor de luie mensen...",
+        redirectStatus: "Doorverwijzen naar Gemini...",
+        redirectManual: "Handmatig openen als het vastloopt",
+        fallbackWarning: "Voer eerst een vraag in!",
+        sarcasms: [
+            "Wow, laat mij je leren hoe je AI gebruikt...",
+            "Kijk goed naar mijn handen op het scherm.",
+            "Hier typ je tekst, geloof je het?",
+            "En nu gebeurt er een echt technologisch wonder...",
+            "Klik op de magische blauwe knop!",
+            "Voilà! Dat was ongelooflijk moeilijk, toch?"
+        ]
+    }
+});

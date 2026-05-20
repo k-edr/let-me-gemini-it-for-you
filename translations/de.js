@@ -1,0 +1,41 @@
+window.LMGIFY_REGISTER_TRANSLATION('de', {
+    label: 'Deutsch',
+    flag: '🇩🇪',
+    strings: {
+        badgeTitle: "🤖 Lass mich das in Gemini für dich suchen",
+        heading: "<span class='heading-plain'>Let me </span><span class='gemini-text'>Gemini</span><span class='heading-plain'> it for you</span>",
+        subheading: "Dein Freund hat vergessen, wie man KI nutzt, und nervt dich mit dummen Fragen? Erstell ihm eine interaktive Lektion!",
+        inputPlaceholder: "Welche dumme Frage wurde dir gestellt?",
+        btnGetLink: "Link holen",
+        btnTestSim: "Simulation testen",
+        successMsg: "Link erfolgreich erstellt!",
+        copyBtn: "Kopieren",
+        copiedBtn: "Kopiert!",
+        warnTitle: "Hinweis vom Entwickler:",
+        warnDesc1: 'Dieser Link wurde in einer <span class="text-amber-300 font-semibold">temporären interaktiven Vorschau (Sandbox)</span> erstellt. Er funktioniert in diesem Tab (über „Simulation testen“), aber deine Freunde können ihn nicht von außen öffnen.',
+        warnDesc2: 'Damit Links für alle funktionieren, hoste den gesamten Projektordner (index.html + translations/) kostenlos auf <a href="https://pages.github.com/" target="_blank" class="text-violet-400 hover:underline">GitHub Pages</a>, <a href="https://vercel.com" target="_blank" class="text-violet-400 hover:underline">Vercel</a> oder <a href="https://www.netlify.com" target="_blank" class="text-violet-400 hover:underline">Netlify</a>!',
+        bottomDesc: "Die gesendete URL zeigt deinem Freund eine interaktive Lektion und leitet dann zur Antwort mit Gemini-KI-Übersicht weiter (`udm=50`).",
+        simHeading: "<span class='heading-plain'>Lass mich in </span><span class='gemini-text'>Gemini</span><span class='heading-plain'> für dich suchen</span>",
+        simPlaceholder: "Pass gut auf...",
+        simBtnSearch: "Gemini-Suche",
+        simBtnEasy: "War das schwer?",
+        step1Title: "Schritt 1.",
+        step1Desc: "Eingabezeile öffnen.",
+        step2Title: "Schritt 2.",
+        step2Desc: "Deine extrem komplexe Frage eintippen...",
+        step3Title: "Schritt 3.",
+        step3Desc: "Auf „Suchen“ klicken.",
+        bannerDefault: "Anleitung für alle Faulen...",
+        redirectStatus: "Weiterleitung zu Gemini...",
+        redirectManual: "Manuell öffnen, falls es hängt",
+        fallbackWarning: "Bitte zuerst eine Frage eingeben!",
+        sarcasms: [
+            "Wow, lass mich dir zeigen, wie man KI benutzt...",
+            "Schau genau auf meine Hände auf dem Bildschirm.",
+            "Hier tippt man Text ein, unglaublich, oder?",
+            "Und jetzt passiert ein echtes Technikwunder...",
+            "Klick auf den magischen blauen Button!",
+            "Voilà! Das war unglaublich schwer, oder?"
+        ]
+    }
+});

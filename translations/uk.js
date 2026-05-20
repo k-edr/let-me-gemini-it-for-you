@@ -1,0 +1,41 @@
+window.LMGIFY_REGISTER_TRANSLATION('uk', {
+    label: 'Українська',
+    flag: '🇺🇦',
+    strings: {
+        badgeTitle: "🤖 Давай я пошукаю в Gemini за тебе",
+        heading: "<span class='heading-plain'>Let me </span><span class='gemini-text'>Gemini</span><span class='heading-plain'> it for you</span>",
+        subheading: "Твій друг розучився шукати відповіді сам і закидає тебе дурними питаннями? Створи для нього інтерактивний урок!",
+        inputPlaceholder: "Яке дурне питання тобі поставили?",
+        btnGetLink: "Отримати посилання",
+        btnTestSim: "Протестувати",
+        successMsg: "Посилання успішно згенеровано!",
+        copyBtn: "Копіювати",
+        copiedBtn: "Скопійовано!",
+        warnTitle: "Важлива примітка розробника:",
+        warnDesc1: 'Це посилання створено всередині <span class="text-amber-300 font-semibold">тимчасового інтерактивного прев\'ю (пісочниці)</span>. Воно буде працювати в поточній вкладці, але ваші друзі не зможуть його відкрити ззовні.',
+        warnDesc2: 'Щоб посилання працювало у всіх, просто скачайте цей файл і безкоштовно опублікуйте його на <a href="https://pages.github.com/" target="_blank" class="text-violet-400 hover:underline">GitHub Pages</a>, <a href="https://vercel.com" target="_blank" class="text-violet-400 hover:underline">Vercel</a> або <a href="https://www.netlify.com" target="_blank" class="text-violet-400 hover:underline">Netlify</a>!',
+        bottomDesc: "Надісланий URL покаже вашому другу інтерактивний урок про користь пошуку Gemini, а потім перенаправить на готову відповідь з AI-зведенням (`udm=50`).",
+        simHeading: "<span class='heading-plain'>Давай я пошукаю в </span><span class='gemini-text'>Gemini</span><span class='heading-plain'> за тебе</span>",
+        simPlaceholder: "Дивись уважно...",
+        simBtnSearch: "Пошук у Gemini",
+        simBtnEasy: "Це було складно?",
+        step1Title: "Крок 1.",
+        step1Desc: "Відкриваємо рядок введення.",
+        step2Title: "Крок 2.",
+        step2Desc: "Друкуємо твоє надскладне питання...",
+        step3Title: "Крок 3.",
+        step3Desc: "Тиснемо кнопку «Пошук».",
+        bannerDefault: "Інструкція для тих, кому лінь...",
+        redirectStatus: "Йде автоматичний перехід до Gemini...",
+        redirectManual: "Перейти вручную, якщо зависло",
+        fallbackWarning: "Введіть спочатку запит!",
+        sarcasms: [
+            "Ого, давай я навчу тебе користуватися ШІ...",
+            "Уважно стеж за руками на екрані.",
+            "Текст вводиться сюди, уявляєш?",
+            "А зараз станеться справжнє диво техніки...",
+            "Тиснемо на магічну синю кнопочку!",
+            "Вуаля! Це було неймовірно важко, чи не так?"
+        ]
+    }
+});
