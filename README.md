@@ -9,9 +9,14 @@ Static single-page app: enter a question, share a link, watch a sarcastic tutori
 ## Project structure
 
 ```
-├── index.html              # English (default) + app logic
+├── index.html              # markup only
+├── assets/
+│   ├── main.css            # Tailwind build (npm run build:css)
+│   ├── styles.css          # custom theme & animations
+│   ├── icons.js            # inline SVG icons
+│   └── app.js              # app logic & i18n
 ├── translations/
-│   ├── manifest.json       # list of locale codes (auto-synced)
+│   ├── manifest.json       # locale metadata (auto-synced)
 │   ├── uk.js, de.js, nl.js # one file per language
 │   └── TEMPLATE.js         # copy when adding a locale
 └── scripts/
@@ -55,9 +60,10 @@ After each successful deploy, `deploy.yml` removes older `github-pages` deployme
 ### Scripts
 
 ```bash
+npm run build:css    # compile Tailwind → assets/main.css
 npm run i18n:sync    # regenerate translations/manifest.json
 npm run i18n:verify  # check manifest matches locale files
-npm run ci           # sync + verify (same as CI job)
+npm run ci           # build + sync + verify (same as CI job)
 ```
 
 ## License
