@@ -2,6 +2,8 @@
 
 An homage to [Let Me Google That For You](https://lmgtfy.com/) — but with Gemini.
 
+Try it here: [Let Me Gemini It For You](https://k-edr.github.io/let-me-gemini-it-for-you/)
+
 Static single-page app: enter a question, share a link, watch a sarcastic tutorial, then redirect to Google Search with Gemini overview (`udm=50`).
 
 ## Project structure
