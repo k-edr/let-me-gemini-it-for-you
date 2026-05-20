@@ -23,6 +23,15 @@ jobs:
         with:
           node-version: "20"
 
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build CSS
+        run: npm run build:css
+
+      - name: Check CSS is committed
+        run: git diff --exit-code assets/main.css
+
       - name: Sync i18n manifest
         run: npm run i18n:sync
 
@@ -35,5 +44,7 @@ jobs:
       - name: Check required static files
         run: |
           test -f index.html
+          test -f assets/main.css
+          test -f assets/app.js
           test -f translations/manifest.json
           test -f .nojekyll

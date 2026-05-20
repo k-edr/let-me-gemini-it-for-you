@@ -1,0 +1,124 @@
+body {
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: #030712;
+    overflow-x: hidden;
+}
+
+.gemini-bg {
+    background: radial-gradient(circle at 50% -20%, rgba(79, 70, 229, 0.08) 0%, rgba(168, 85, 247, 0.05) 40%, rgba(3, 7, 18, 0) 70%),
+        radial-gradient(circle at 10% 80%, rgba(59, 130, 246, 0.04) 0%, rgba(3, 7, 18, 0) 50%),
+        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.04) 0%, rgba(3, 7, 18, 0) 50%);
+}
+
+#main-heading,
+#playback-heading {
+    color: #ffffff;
+}
+
+.heading-plain {
+    color: #ffffff;
+    -webkit-text-fill-color: #ffffff;
+    text-shadow: 0 0 8px rgba(255, 255, 255, 0.12), 0 1px 4px rgba(0, 0, 0, 0.2);
+}
+
+.gemini-text {
+    background: linear-gradient(135deg, #3b82f6 10%, #8b5cf6 50%, #ec4899 90%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    background-size: 200% auto;
+    animation: shine 4s linear infinite;
+}
+
+#user-query::placeholder,
+#playback-query::placeholder {
+    color: #ffffff;
+    opacity: 0.85;
+}
+
+@keyframes shine {
+    to {
+        background-position: 200% center;
+    }
+}
+
+#virtual-cursor {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s ease;
+    display: none;
+}
+
+#virtual-cursor.is-animating {
+    will-change: left, top;
+}
+
+.click-pulse {
+    position: absolute;
+    border: 4px solid #8b5cf6;
+    border-radius: 50%;
+    background: rgba(139, 92, 246, 0.3);
+    width: 10px;
+    height: 10px;
+    transform: translate(-50%, -50%) scale(1);
+    animation: pulse-out 0.6s ease-out forwards;
+    pointer-events: none;
+    z-index: 9998;
+}
+
+@keyframes pulse-out {
+    0% {
+        width: 10px;
+        height: 10px;
+        opacity: 1;
+    }
+
+    100% {
+        width: 60px;
+        height: 60px;
+        opacity: 0;
+    }
+}
+
+.glow-box:focus-within {
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.25);
+    border-color: rgba(139, 92, 246, 0.6);
+}
+
+.hint-bubble {
+    transform: translateY(10px);
+    opacity: 0;
+    transition: transform 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275), opacity 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.hint-bubble.show {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+[data-lmgify-icon] svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    .gemini-text,
+    .logo-pulse,
+    .banner-ping {
+        animation: none !important;
+    }
+
+    .hint-bubble {
+        transition: none;
+    }
+
+    .click-pulse {
+        animation: none;
+        opacity: 0;
+    }
+}

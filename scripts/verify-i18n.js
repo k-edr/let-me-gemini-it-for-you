@@ -23,11 +23,15 @@ try {
 }
 
 if (!Array.isArray(manifest)) {
-    console.error('manifest.json must be a JSON array of language codes.');
+    console.error('manifest.json must be a JSON array of locale entries.');
     process.exit(1);
 }
 
-const manifestSorted = [...manifest].sort();
+const manifestCodes = manifest.map((entry) =>
+    typeof entry === 'string' ? entry : entry?.code
+).filter(Boolean);
+
+const manifestSorted = [...manifestCodes].sort();
 const expected = JSON.stringify(localeFiles);
 const actual = JSON.stringify(manifestSorted);
 
@@ -39,7 +43,7 @@ if (expected !== actual) {
     process.exit(1);
 }
 
-for (const code of manifest) {
+for (const code of manifestCodes) {
     const filePath = path.join(translationsDir, `${code}.js`);
     if (!fs.existsSync(filePath)) {
         console.error(`Missing locale file for "${code}": ${filePath}`);
@@ -53,4 +57,4 @@ for (const code of manifest) {
     }
 }
 
-console.log(`i18n OK: ${manifest.length} locale(s) — ${manifest.join(', ')}`);
+console.log(`i18n OK: ${manifestCodes.length} locale(s) — ${manifestCodes.join(', ')}`);

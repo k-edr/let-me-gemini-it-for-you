@@ -1,10 +1,14 @@
-{
+﻿{
   "name": "let-me-gemini-it-for-you",
   "private": true,
   "description": "Let me Gemini it for you — static sarcastic AI search tutorial",
   "scripts": {
+    "build:css": "tailwindcss -i ./src/input.css -o ./assets/main.css --minify",
     "i18n:sync": "node scripts/sync-i18n-manifest.js",
     "i18n:verify": "node scripts/verify-i18n.js",
-    "ci": "npm run i18n:sync && npm run i18n:verify"
+    "ci": "npm run build:css && npm run i18n:sync && npm run i18n:verify"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
   }
 }
