@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,10 +8,11 @@
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- Google Fonts: Inter -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
     <!-- Font Awesome Icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+
     <style>
         body {
             font-family: 'Inter', sans-serif;
@@ -21,8 +23,8 @@
         /* Gemini Glow Background — softer top glow so headings stay readable */
         .gemini-bg {
             background: radial-gradient(circle at 50% -20%, rgba(79, 70, 229, 0.08) 0%, rgba(168, 85, 247, 0.05) 40%, rgba(3, 7, 18, 0) 70%),
-                        radial-gradient(circle at 10% 80%, rgba(59, 130, 246, 0.04) 0%, rgba(3, 7, 18, 0) 50%),
-                        radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.04) 0%, rgba(3, 7, 18, 0) 50%);
+                radial-gradient(circle at 10% 80%, rgba(59, 130, 246, 0.04) 0%, rgba(3, 7, 18, 0) 50%),
+                radial-gradient(circle at 90% 80%, rgba(236, 72, 153, 0.04) 0%, rgba(3, 7, 18, 0) 50%);
         }
 
         #main-heading,
@@ -52,7 +54,9 @@
         }
 
         @keyframes shine {
-            to { background-position: 200% center; }
+            to {
+                background-position: 200% center;
+            }
         }
 
         /* Virtual Cursor Styling */
@@ -86,6 +90,7 @@
                 height: 10px;
                 opacity: 1;
             }
+
             100% {
                 width: 60px;
                 height: 60px;
@@ -105,93 +110,112 @@
             opacity: 0;
             transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
+
         .hint-bubble.show {
             transform: translateY(0);
             opacity: 1;
         }
     </style>
 </head>
+
 <body class="gemini-bg text-slate-100 min-h-screen flex flex-col justify-between relative">
 
     <!-- Virtual Cursor SVG -->
     <div id="virtual-cursor" class="drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">
         <svg width="28" height="28" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path d="M4 2V27.18L11.52 19.66L19.52 30L23.76 26.74L16 16.7L25.04 16.7L4 2Z" fill="#1e1b4b" stroke="#a78bfa" stroke-width="2.5" stroke-linejoin="round"/>
+            <path d="M4 2V27.18L11.52 19.66L19.52 30L23.76 26.74L16 16.7L25.04 16.7L4 2Z" fill="#1e1b4b"
+                stroke="#a78bfa" stroke-width="2.5" stroke-linejoin="round" />
         </svg>
     </div>
 
     <!-- Notification / Sarcasm banner during simulation -->
-    <div id="banner-instruction" class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-11/12 max-w-lg bg-slate-900/90 border border-violet-500/30 backdrop-blur-md rounded-2xl p-4 shadow-2xl text-center transition-all duration-500 scale-90 opacity-0 pointer-events-none">
+    <div id="banner-instruction"
+        class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 w-11/12 max-w-lg bg-slate-900/90 border border-violet-500/30 backdrop-blur-md rounded-2xl p-4 shadow-2xl text-center transition-all duration-500 scale-90 opacity-0 pointer-events-none">
         <div class="flex items-center justify-center space-x-3">
             <span class="flex h-3 w-3 relative">
-                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
+                <span
+                    class="animate-ping absolute inline-flex h-full w-full rounded-full bg-pink-400 opacity-75"></span>
                 <span class="relative inline-flex rounded-full h-3 w-3 bg-pink-500"></span>
             </span>
-            <p id="banner-text" class="text-sm md:text-base font-semibold text-slate-200">Instructions for those too lazy...</p>
+            <p id="banner-text" class="text-sm md:text-base font-semibold text-slate-200">Instructions for those too
+                lazy...</p>
         </div>
     </div>
 
     <header class="p-6 flex justify-between items-center max-w-6xl w-full mx-auto">
         <div class="flex items-center space-x-2">
-            <span id="badge-title" class="text-xs bg-violet-600/20 text-violet-400 border border-violet-500/30 px-3 py-1.5 rounded-full font-semibold">
+            <span id="badge-title"
+                class="text-xs bg-violet-600/20 text-violet-400 border border-violet-500/30 px-3 py-1.5 rounded-full font-semibold">
                 🤖 Let Me Gemini It
             </span>
         </div>
-        
+
         <!-- Language Switcher Dropdown -->
         <div class="flex items-center space-x-4">
             <div class="relative inline-block text-left" id="lang-picker-container">
-                <button id="lang-btn" class="bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 focus:outline-none">
+                <button id="lang-btn"
+                    class="bg-slate-900/80 border border-slate-800 text-slate-300 hover:text-white px-3 py-1.5 rounded-xl text-xs font-semibold transition flex items-center space-x-1.5 focus:outline-none">
                     <i class="fa-solid fa-globe"></i>
                     <span id="current-lang-label">English</span>
                     <i class="fa-solid fa-chevron-down text-[10px]"></i>
                 </button>
-                <div id="lang-dropdown" class="hidden absolute right-0 mt-2 w-36 rounded-xl bg-slate-900 border border-slate-800 shadow-2xl z-50 overflow-hidden">
+                <div id="lang-dropdown"
+                    class="hidden absolute right-0 mt-2 w-36 rounded-xl bg-slate-900 border border-slate-800 shadow-2xl z-50 overflow-hidden">
                     <!-- Populated dynamically from translations/manifest.json -->
                 </div>
             </div>
 
-            <a href="https://github.com" target="_blank" class="text-slate-400 hover:text-white transition" title="GitHub">
+            <a href="https://github.com/k-edr/let-me-gemini-it-for-you" target="_blank"
+                class="text-slate-400 hover:text-white transition" title="GitHub">
                 <i class="fab fa-github text-xl"></i>
             </a>
         </div>
     </header>
 
     <main class="flex-grow flex flex-col items-center justify-center px-4 py-8 relative z-10">
-        
+
         <!-- ================= GENERATOR MODE (MAIN STATE) ================= -->
         <div id="creator-section" class="w-full max-w-2xl text-center space-y-10 transition-all duration-500">
             <!-- Logo area -->
             <div class="space-y-4">
                 <div class="relative inline-block">
                     <!-- Glowing gemini star logo -->
-                    <svg class="w-16 h-16 mx-auto animate-pulse" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C12 2 12 8.5 18.5 8.5C18.5 8.5 12 8.5 12 15C12 15 12 8.5 5.5 8.5C5.5 8.5 12 8.5 12 2Z" fill="url(#gemini-grad-logo)"/>
-                        <path d="M18 14C18 14 18 17.5 21.5 17.5C21.5 17.5 18 17.5 18 21C18 21 18 17.5 14.5 17.5C14.5 17.5 18 17.5 18 14Z" fill="url(#gemini-grad-logo)"/>
+                    <svg class="w-16 h-16 mx-auto animate-pulse" viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M12 2C12 2 12 8.5 18.5 8.5C18.5 8.5 12 8.5 12 15C12 15 12 8.5 5.5 8.5C5.5 8.5 12 8.5 12 2Z"
+                            fill="url(#gemini-grad-logo)" />
+                        <path
+                            d="M18 14C18 14 18 17.5 21.5 17.5C21.5 17.5 18 17.5 18 21C18 21 18 17.5 14.5 17.5C14.5 17.5 18 17.5 18 14Z"
+                            fill="url(#gemini-grad-logo)" />
                         <defs>
-                            <linearGradient id="gemini-grad-logo" x1="5.5" y1="2" x2="21.5" y2="21" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#3b82f6"/>
-                                <stop offset="0.5" stop-color="#8b5cf6"/>
-                                <stop offset="1" stop-color="#ec4899"/>
+                            <linearGradient id="gemini-grad-logo" x1="5.5" y1="2" x2="21.5" y2="21"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#3b82f6" />
+                                <stop offset="0.5" stop-color="#8b5cf6" />
+                                <stop offset="1" stop-color="#ec4899" />
                             </linearGradient>
                         </defs>
                     </svg>
                 </div>
                 <h1 id="main-heading" class="text-4xl md:text-6xl font-extrabold tracking-tight">
-                    <span class="heading-plain">Let me </span><span class="gemini-text">Gemini</span><span class="heading-plain"> it for you</span>
+                    <span class="heading-plain">Let me </span><span class="gemini-text">Gemini</span><span
+                        class="heading-plain"> it for you</span>
                 </h1>
                 <p id="main-subheading" class="text-slate-300 text-sm md:text-base max-w-md mx-auto">
-                    Your friend forgot how to use AI and keeps asking dumb questions? Create an interactive lesson for them!
+                    Your friend forgot how to use AI and keeps asking dumb questions? Create an interactive lesson for
+                    them!
                 </p>
             </div>
 
             <!-- Interactive Search Box -->
-            <div class="bg-slate-900/60 border border-slate-800 rounded-3xl p-2 shadow-2xl backdrop-blur-md glow-box transition-all duration-300 max-w-xl mx-auto">
+            <div
+                class="bg-slate-900/60 border border-slate-800 rounded-3xl p-2 shadow-2xl backdrop-blur-md glow-box transition-all duration-300 max-w-xl mx-auto">
                 <div class="flex items-center px-4 py-2 space-x-3">
                     <i class="fa-solid fa-magnifying-glass text-slate-500 text-lg"></i>
-                    <input type="text" id="user-query" placeholder="What dumb question were you asked?" 
-                           class="bg-transparent w-full focus:outline-none text-white placeholder:text-white/85 text-base md:text-lg"
-                           autocomplete="off">
+                    <input type="text" id="user-query" placeholder="What dumb question were you asked?"
+                        class="bg-transparent w-full focus:outline-none text-white placeholder:text-white/85 text-base md:text-lg"
+                        autocomplete="off">
                     <button id="clear-btn" class="text-slate-500 hover:text-slate-300 transition hidden" title="Clear">
                         <i class="fa-solid fa-xmark text-lg"></i>
                     </button>
@@ -200,24 +224,30 @@
 
             <!-- Action Buttons -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                <button id="btn-generate" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium rounded-2xl shadow-lg hover:shadow-indigo-500/20 active:scale-[0.98] transition-all">
+                <button id="btn-generate"
+                    class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-500 hover:to-indigo-500 text-white font-medium rounded-2xl shadow-lg hover:shadow-indigo-500/20 active:scale-[0.98] transition-all">
                     <i class="fa-solid fa-link mr-2"></i> <span id="txt-get-link">Get Link</span>
                 </button>
-                <button id="btn-preview-direct" class="w-full sm:w-auto px-8 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-medium rounded-2xl border border-slate-700 active:scale-[0.98] transition-all">
+                <button id="btn-preview-direct"
+                    class="w-full sm:w-auto px-8 py-3.5 bg-slate-800 hover:bg-slate-700 text-slate-200 hover:text-white font-medium rounded-2xl border border-slate-700 active:scale-[0.98] transition-all">
                     <i class="fa-solid fa-wand-magic-sparkles mr-2"></i> <span id="txt-test-sim">Test Simulation</span>
                 </button>
             </div>
 
             <!-- Link Result Panel (Hidden by default) -->
-            <div id="result-panel" class="hidden max-w-xl mx-auto bg-slate-900/40 border border-emerald-500/20 rounded-3xl p-6 shadow-xl backdrop-blur-md space-y-4 text-left">
+            <div id="result-panel"
+                class="hidden max-w-xl mx-auto bg-slate-900/40 border border-emerald-500/20 rounded-3xl p-6 shadow-xl backdrop-blur-md space-y-4 text-left">
                 <div class="flex items-center space-x-2 text-emerald-400 text-sm font-semibold justify-center">
                     <i class="fa-solid fa-circle-check"></i>
                     <span id="txt-success-msg">Link successfully generated!</span>
                 </div>
-                
-                <div class="bg-slate-950/80 border border-slate-800 rounded-2xl p-3 flex items-center justify-between space-x-3">
-                    <span id="generated-url" class="text-slate-300 text-xs md:text-sm truncate select-all block w-full">https://lmgify.com/?q=example</span>
-                    <button id="btn-copy" class="bg-slate-800 hover:bg-slate-700 active:bg-emerald-800 border border-slate-700 text-slate-200 hover:text-white px-4 py-2 rounded-xl text-xs font-semibold shrink-0 transition flex items-center space-x-1.5">
+
+                <div
+                    class="bg-slate-950/80 border border-slate-800 rounded-2xl p-3 flex items-center justify-between space-x-3">
+                    <span id="generated-url"
+                        class="text-slate-300 text-xs md:text-sm truncate select-all block w-full">https://lmgify.com/?q=example</span>
+                    <button id="btn-copy"
+                        class="bg-slate-800 hover:bg-slate-700 active:bg-emerald-800 border border-slate-700 text-slate-200 hover:text-white px-4 py-2 rounded-xl text-xs font-semibold shrink-0 transition flex items-center space-x-1.5">
                         <i id="copy-icon" class="fa-solid fa-copy"></i>
                         <span id="copy-text">Copy</span>
                     </button>
@@ -230,15 +260,23 @@
                         <span id="warn-title">Developer's Note:</span>
                     </div>
                     <p id="warn-desc-1" class="text-xs text-slate-400 leading-relaxed">
-                        This link is created inside a <span class="text-amber-300 font-semibold">temporary interactive preview (sandbox)</span>. It will work in this current tab (using "Test Simulation"), but your friends won't be able to access it from the external web as the session is protected.
+                        This link is created inside a <span class="text-amber-300 font-semibold">temporary interactive
+                            preview (sandbox)</span>. It will work in this current tab (using "Test Simulation"), but
+                        your friends won't be able to access it from the external web as the session is protected.
                     </p>
                     <p id="warn-desc-2" class="text-xs text-slate-400 leading-relaxed">
-                        To make links shareable with everyone, host the whole project folder (index.html + translations/) for free on <a href="https://pages.github.com/" target="_blank" class="text-violet-400 hover:underline">GitHub Pages</a>, <a href="https://vercel.com" target="_blank" class="text-violet-400 hover:underline">Vercel</a>, or <a href="https://www.netlify.com" target="_blank" class="text-violet-400 hover:underline">Netlify</a>!
+                        To make links shareable with everyone, host the whole project folder (index.html +
+                        translations/) for free on <a href="https://pages.github.com/" target="_blank"
+                            class="text-violet-400 hover:underline">GitHub Pages</a>, <a href="https://vercel.com"
+                            target="_blank" class="text-violet-400 hover:underline">Vercel</a>, or <a
+                            href="https://www.netlify.com" target="_blank"
+                            class="text-violet-400 hover:underline">Netlify</a>!
                     </p>
                 </div>
 
                 <p id="result-description" class="text-xs text-slate-500 text-center">
-                    The sent URL will show your friend an interactive lesson, then redirect them to the answer with Gemini AI overview (`udm=50`).
+                    The sent URL will show your friend an interactive lesson, then redirect them to the answer with
+                    Gemini AI overview (`udm=50`).
                 </p>
             </div>
         </div>
@@ -249,58 +287,74 @@
             <div class="space-y-4">
                 <div class="relative inline-block">
                     <svg class="w-20 h-20 mx-auto" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M12 2C12 2 12 8.5 18.5 8.5C18.5 8.5 12 8.5 12 15C12 15 12 8.5 5.5 8.5C5.5 8.5 12 8.5 12 2Z" fill="url(#gemini-grad-logo-play)"/>
+                        <path
+                            d="M12 2C12 2 12 8.5 18.5 8.5C18.5 8.5 12 8.5 12 15C12 15 12 8.5 5.5 8.5C5.5 8.5 12 8.5 12 2Z"
+                            fill="url(#gemini-grad-logo-play)" />
                         <defs>
-                            <linearGradient id="gemini-grad-logo-play" x1="5.5" y1="2" x2="18.5" y2="15" gradientUnits="userSpaceOnUse">
-                                <stop stop-color="#3b82f6"/>
-                                <stop offset="0.5" stop-color="#8b5cf6"/>
-                                <stop offset="1" stop-color="#ec4899"/>
+                            <linearGradient id="gemini-grad-logo-play" x1="5.5" y1="2" x2="18.5" y2="15"
+                                gradientUnits="userSpaceOnUse">
+                                <stop stop-color="#3b82f6" />
+                                <stop offset="0.5" stop-color="#8b5cf6" />
+                                <stop offset="1" stop-color="#ec4899" />
                             </linearGradient>
                         </defs>
                     </svg>
                 </div>
                 <h1 id="playback-heading" class="text-4xl md:text-5xl font-extrabold tracking-tight">
-                    <span class="heading-plain">Let me </span><span class="gemini-text">Gemini</span><span class="heading-plain"> it for you</span>
+                    <span class="heading-plain">Let me </span><span class="gemini-text">Gemini</span><span
+                        class="heading-plain"> it for you</span>
                 </h1>
             </div>
 
             <!-- Virtual Search Box that will be "typed" in -->
-            <div id="virtual-search-wrapper" class="bg-slate-900/60 border border-slate-800 rounded-3xl p-2 shadow-2xl backdrop-blur-md transition-all duration-300 max-w-xl mx-auto relative">
+            <div id="virtual-search-wrapper"
+                class="bg-slate-900/60 border border-slate-800 rounded-3xl p-2 shadow-2xl backdrop-blur-md transition-all duration-300 max-w-xl mx-auto relative">
                 <div class="flex items-center px-4 py-3 space-x-3">
                     <i class="fa-solid fa-magnifying-glass text-slate-500 text-lg"></i>
-                    <input type="text" id="playback-query" readonly placeholder="Watch closely..." 
-                           class="bg-transparent w-full focus:outline-none text-white placeholder:text-white/85 text-base md:text-lg cursor-default select-none">
+                    <input type="text" id="playback-query" readonly placeholder="Watch closely..."
+                        class="bg-transparent w-full focus:outline-none text-white placeholder:text-white/85 text-base md:text-lg cursor-default select-none">
                 </div>
             </div>
 
             <!-- Virtual Buttons simulation -->
             <div class="flex flex-col sm:flex-row items-center justify-center gap-4 max-w-md mx-auto relative">
-                <button id="virtual-btn-search" class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-2xl shadow-lg transition-all border border-transparent duration-200 cursor-default select-none">
+                <button id="virtual-btn-search"
+                    class="w-full sm:w-auto px-8 py-3.5 bg-gradient-to-r from-blue-600 to-indigo-600 text-white font-medium rounded-2xl shadow-lg transition-all border border-transparent duration-200 cursor-default select-none">
                     <i class="fa-solid fa-magnifying-glass mr-2"></i> <span id="txt-sim-search">Gemini Search</span>
                 </button>
-                <button id="virtual-btn-easy" class="w-full sm:w-auto px-8 py-3.5 bg-slate-800 text-slate-300 font-medium rounded-2xl border border-slate-700 transition-all duration-200 cursor-default select-none">
-                     <span id="txt-sim-easy">Was that hard?</span>
+                <button id="virtual-btn-easy"
+                    class="w-full sm:w-auto px-8 py-3.5 bg-slate-800 text-slate-300 font-medium rounded-2xl border border-slate-700 transition-all duration-200 cursor-default select-none">
+                    <span id="txt-sim-easy">Was that hard?</span>
                 </button>
             </div>
 
             <!-- Sarcastic floating step bubbles -->
             <div class="flex flex-col items-center space-y-3 pt-6">
-                <div id="bubble-step1" class="hint-bubble bg-slate-900/80 border border-slate-800 px-5 py-2.5 rounded-2xl text-slate-300 text-sm shadow-md max-w-xs">
-                    <span class="text-violet-400 font-bold mr-1" id="step1-title">Step 1.</span> <span id="step1-desc">Open the input line.</span>
+                <div id="bubble-step1"
+                    class="hint-bubble bg-slate-900/80 border border-slate-800 px-5 py-2.5 rounded-2xl text-slate-300 text-sm shadow-md max-w-xs">
+                    <span class="text-violet-400 font-bold mr-1" id="step1-title">Step 1.</span> <span
+                        id="step1-desc">Open the input line.</span>
                 </div>
-                <div id="bubble-step2" class="hint-bubble bg-slate-900/80 border border-slate-800 px-5 py-2.5 rounded-2xl text-slate-300 text-sm shadow-md max-w-xs">
-                    <span class="text-violet-400 font-bold mr-1" id="step2-title">Step 2.</span> <span id="step2-desc">Type your extremely complex question...</span>
+                <div id="bubble-step2"
+                    class="hint-bubble bg-slate-900/80 border border-slate-800 px-5 py-2.5 rounded-2xl text-slate-300 text-sm shadow-md max-w-xs">
+                    <span class="text-violet-400 font-bold mr-1" id="step2-title">Step 2.</span> <span
+                        id="step2-desc">Type your extremely complex question...</span>
                 </div>
-                <div id="bubble-step3" class="hint-bubble bg-slate-900/80 border border-slate-800 px-5 py-2.5 rounded-2xl text-slate-300 text-sm shadow-md max-w-xs">
-                    <span class="text-violet-400 font-bold mr-1" id="step3-title">Step 3.</span> <span id="step3-desc">Press 'Search' button.</span>
+                <div id="bubble-step3"
+                    class="hint-bubble bg-slate-900/80 border border-slate-800 px-5 py-2.5 rounded-2xl text-slate-300 text-sm shadow-md max-w-xs">
+                    <span class="text-violet-400 font-bold mr-1" id="step3-title">Step 3.</span> <span
+                        id="step3-desc">Press 'Search' button.</span>
                 </div>
             </div>
 
             <!-- Fail-safe Direct Redirection box if popup blocked -->
-            <div id="redirect-notification" class="hidden p-4 bg-violet-950/30 border border-violet-500/20 rounded-2xl max-w-md mx-auto text-sm space-y-2">
+            <div id="redirect-notification"
+                class="hidden p-4 bg-violet-950/30 border border-violet-500/20 rounded-2xl max-w-md mx-auto text-sm space-y-2">
                 <p class="text-slate-300" id="txt-redirect-status">Redirecting to Gemini...</p>
-                <a id="direct-search-link" href="#" class="inline-flex items-center text-violet-400 hover:text-violet-300 underline font-semibold">
-                    <span id="txt-redirect-manual">Go manually if stuck</span> <i class="fa-solid fa-arrow-right ml-1"></i>
+                <a id="direct-search-link" href="#"
+                    class="inline-flex items-center text-violet-400 hover:text-violet-300 underline font-semibold">
+                    <span id="txt-redirect-manual">Go manually if stuck</span> <i
+                        class="fa-solid fa-arrow-right ml-1"></i>
                 </a>
             </div>
         </div>
@@ -310,7 +364,8 @@
     <!-- Footer -->
     <footer class="p-6 text-center text-xs text-slate-600 border-t border-slate-900 max-w-6xl w-full mx-auto space-y-1">
         <p id="footer-text-1">© 2026 Let me Gemini it for you. Made with love and a healthy dose of sarcasm.</p>
-        <p id="footer-text-2" class="text-slate-700">All rights reserved for people who know how to use search independently.</p>
+        <p id="footer-text-2" class="text-slate-700">All rights reserved for people who know how to use search
+            independently.</p>
     </footer>
 
     <script>
@@ -432,7 +487,7 @@
             const virtualSearchWrapper = document.getElementById('virtual-search-wrapper');
             const virtualBtnSearch = document.getElementById('virtual-btn-search');
             const virtualCursor = document.getElementById('virtual-cursor');
-            
+
             // Notification Elements
             const bannerInstruction = document.getElementById('banner-instruction');
             const bannerText = document.getElementById('banner-text');
@@ -471,7 +526,7 @@
                 playbackQuery.placeholder = translations[lang].simPlaceholder;
                 document.getElementById('txt-sim-search').innerText = translations[lang].simBtnSearch;
                 document.getElementById('txt-sim-easy').innerText = translations[lang].simBtnEasy;
-                
+
                 document.getElementById('step1-title').innerText = translations[lang].step1Title;
                 document.getElementById('step1-desc').innerText = translations[lang].step1Desc;
                 document.getElementById('step2-title').innerText = translations[lang].step2Title;
@@ -600,7 +655,7 @@
                 // Parse absolute window location safely to circumvent iframe origins
                 const baseHref = window.location.href.split('?')[0].split('#')[0];
                 const finalUrl = `${baseHref}?q=${encodeURIComponent(rawQuery)}&lang=${currentLanguage}`;
-                
+
                 generatedUrl.innerText = finalUrl;
                 resultPanel.classList.remove('hidden');
                 resultPanel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -633,7 +688,7 @@
                     btnCopy.classList.add('bg-emerald-800', 'text-white');
                     copyText.innerText = translations[currentLanguage].copiedBtn;
                     copyIcon.className = "fa-solid fa-check";
-                    
+
                     setTimeout(() => {
                         btnCopy.classList.remove('bg-emerald-800', 'text-white');
                         copyText.innerText = translations[currentLanguage].copyBtn;
@@ -672,10 +727,10 @@
                 const step = (now) => {
                     const elapsed = now - startTime;
                     const progress = Math.min(elapsed / duration, 1);
-                    
+
                     // Ease-in-out movement
-                    const ease = progress < 0.5 
-                        ? 2 * progress * progress 
+                    const ease = progress < 0.5
+                        ? 2 * progress * progress
                         : -1 + (4 - 2 * progress) * progress;
 
                     const currentX = (1 - ease) * (1 - ease) * startX + 2 * (1 - ease) * ease * ctrlX + ease * ease * targetX;
@@ -697,7 +752,7 @@
             const typeText = (text, element, charInterval, callback) => {
                 let index = 0;
                 element.value = "";
-                
+
                 const timer = setInterval(() => {
                     if (index < text.length) {
                         element.value += text.charAt(index);
@@ -717,7 +772,7 @@
 
                 virtualCursor.style.left = `${window.innerWidth - 80}px`;
                 virtualCursor.style.top = `${window.innerHeight / 2}px`;
-                
+
                 const isMobile = window.innerWidth <= 768;
                 if (!isMobile) {
                     virtualCursor.style.display = 'block';
@@ -735,7 +790,7 @@
                 // Step 2: Show Step 1 bubble and move cursor to Search Input
                 setTimeout(() => {
                     bubbleStep1.classList.add('show');
-                    
+
                     const rect = virtualSearchWrapper.getBoundingClientRect();
                     const targetX = rect.left + rect.width / 2;
                     const targetY = rect.top + rect.height / 2 + window.scrollY;
@@ -757,7 +812,7 @@
                 const startTyping = () => {
                     bubbleStep2.classList.add('show');
                     bannerText.innerText = s[2];
-                    
+
                     typeText(queryText, playbackQuery, 120, () => {
                         virtualSearchWrapper.classList.remove('scale-[1.01]');
                         bannerText.innerText = s[3];
@@ -768,7 +823,7 @@
                 // Step 4: Move cursor to search button and show Step 3 bubble
                 const moveToSearchButton = () => {
                     bubbleStep3.classList.add('show');
-                    
+
                     const rect = virtualBtnSearch.getBoundingClientRect();
                     const targetX = rect.left + rect.width / 2;
                     const targetY = rect.top + rect.height / 2 + window.scrollY;
@@ -776,7 +831,7 @@
                     if (!isMobile) {
                         animateCursorTo(targetX, targetY, 1200, () => {
                             bannerText.innerText = s[4];
-                            
+
                             setTimeout(() => {
                                 triggerClickRipple(targetX, targetY);
                                 virtualBtnSearch.classList.add('scale-95', 'brightness-125');
@@ -793,7 +848,7 @@
                 const finalizeRedirect = () => {
                     virtualBtnSearch.classList.remove('scale-95', 'brightness-125');
                     bannerText.innerText = s[5];
-                    
+
                     redirectNotification.classList.remove('hidden');
                     const targetSearchUrl = `https://www.google.com/search?q=${encodeURIComponent(queryText)}&udm=50`;
                     directSearchLink.href = targetSearchUrl;
@@ -824,4 +879,5 @@
         });
     </script>
 </body>
+
 </html>
